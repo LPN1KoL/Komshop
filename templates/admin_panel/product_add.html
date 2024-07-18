@@ -9,17 +9,41 @@
 
     <h1 id="add">Добавление товара</h1>
     <div class="form">
+        <div class="filler"></div>
         <form class="forma" action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+
             {% for f in form %}
-            <div class="form-field">
-                {{ f }}
-            </div>
+                {% if f.label == 'Общий вид' %}
+                    <div class="form-field-duo">
+                        <label id="label_{{ f.id_for_label }}" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        {{ f }}
+                        <button id="clear_image_button" type="button" onclick="clear_image()">Очистить</button>
+                    </div>
+                {% else %}
+                    <div class="form-field">
+                        <label id="label_{{ f.id_for_label }}" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        {{ f }}
+                    </div>
+                {% endif %}
             {% endfor %}
-            <div class="form-field">
-                <button class="form-button" type="submit">Сохранить</button>
-            </div>
+
+            {% csrf_token %}
+            <button class="form-button" type="submit">Сохранить</button>
         </form>
+        <div class="filler"></div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.getElementById('id_photo').addEventListener('change', () => {
+            document.getElementById('label_id_photo').innerText = document.getElementById('id_photo').value
+        })
+
+        function clear_image() {
+            document.getElementById('id_photo').value = null
+            document.getElementById('label_id_photo').innerText = 'Общий вид'
+        }
+    </script>
 {% endblock %}

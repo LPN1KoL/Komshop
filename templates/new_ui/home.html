@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/new_ui/home.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {% block head %}
+    {% endblock %}
+    <title>KomShop</title>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <div class="navbar">
+
+            <img id="logo" src="{% static 'imgs/logo.svg' %}">
+
+            <ul class="main-menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/examples">Примеры работ</a></li>
+                <li><a href="/catalog/page_1">Каталог</a></li>
+                <li><a href="/about">О нас</a></li>
+            </ul>
+
+            {% if not request.user.is_authenticated %}
+                <a id="to_products_link" href="/login">Авторизоваться</a>
+            {% else %}
+                <a id="to_products_link" href="/logout">Выйти</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>Весёлые дворики</h1>
+        <h3>Откройте мир радости и безудержного веселья с нашими уникальными детскими площадками и яркими аксессуарами для дворов!</h3>
+    </div>
+
+    <div class="products">
+        <h1 id="head-2" class="f5 center">Лучшие товары для вашего двора</h1>
+
+        <div class="products-preview">
+            <div class="product">
+                <img class="product-image" src="{{ image_1 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_1 }}</h1>
+                    <span class="price">{{ price_1 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="{{ image_2 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_2 }}</h1>
+                    <span class="price">{{ price_2 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="{{ image_3 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_3 }}</h1>
+                    <span class="price">{{ price_3 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="{{ image_4 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_4 }}</h1>
+                    <span class="price">{{ price_4 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="{{ image_5 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_5 }}</h1>
+                    <span class="price">{{ price_5 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="{{ image_6 }}" alt="">
+                <div class="product-info">
+                    <h1 class="product-title">{{ name_6 }}</h1>
+                    <span class="price">{{ price_6 }}₽</span><br>
+                    <span class="description">Погрузитесь в волшебный мир игр и приключений на нашей площадке 'Сказка'!</span><br>
+
+                    <a href="/" class="buy-button">
+                        Купить
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="act-container">
+        <h1 class="f5" style="text-align: center; margin-top: 5rem;">Радость Детства</h1>
+        <h3 style="font-size: 30px; text-align: center">Откройте Мир Игры и Веселья</h3>
+
+        <div class="activities">
+
+            <div class="activity">
+                <img src="{% static 'imgs/home/act1.jpeg' %}" alt="" class="activity-img">
+                <div class="dat">
+                    <h1>Свежий Воздух</h1>
+                    <span>Заряд Энергии и Позитива</span>
+                </div>
+            </div>
+            <div class="activity">
+                <img src="{% static 'imgs/home/act2.jpeg' %}" alt="" class="activity-img">
+                <div class="dat">
+                    <h1>Творчество</h1>
+                    <span>Развивайте Фантазию и Мастерство</span>
+                </div>
+            </div>
+            <div class="activity">
+                <img src="{% static 'imgs/home/act4.jpeg' %}" alt="" class="activity-img">
+                <div class="dat">
+                    <h1>Активность</h1>
+                    <span>Здоровье и Веселье в Движении</span>
+                </div>
+            </div>
+            <div class="activity">
+                <img src="{% static 'imgs/home/act5.jpeg' %}" alt="" class="activity-img">
+                <div class="dat">
+                    <h1>Исследование</h1>
+                    <span>Открывайте Новые Горизонты и Знания</span>
+                </div>
+            </div>
+            <div class="activity">
+                <img src="{% static 'imgs/home/act3.jpeg' %}" alt="" class="activity-img">
+                <div class="dat">
+                    <h1>Дружба</h1>
+                    <span>Создавайте Новые Взаимоотношения</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contacts">
+        <h1 style="text-align: center; font-size: 4rem; margin-bottom: 2rem;">Свяжитесь с нами</h1>
+        <div class="contact-form">
+
+            <div class="names">
+                <input type="text" placeholder="Имя">
+                <input type="email" placeholder="email">
+            </div>
+
+            <input type="text" placeholder="Телефон">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Сообщение"></textarea>
+
+            <button type="button">Отправить</button>
+
+        </div>
+
+        <h1 style="text-align: center; font-size: 4rem; margin: 5rem 0;">Контакты</h1>
+
+        <div class="address-block">
+
+            <div class="address">
+                <h1>Телефон</h1>
+                <h3>+7994XXXXXXX</h3>
+            </div>
+            <div class="address">
+                <h1>Email</h1>
+                <h3>bobr_curva@mail.ru</h3>
+            </div>
+            <div class="address">
+                <h1>Адрес</h1>
+                <h3>пр.Ленина, д.27, Комсомольск-на-Амуре</h3>
+            </div>
+            <div class="address">
+                <h1>Часы работы</h1>
+                <h3>ПН-ПТ: 8:00-20:00</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>© 2024 Весёлые дворики.</h4>
+    </div>
+
+</body>
+</html>

@@ -23,22 +23,30 @@
         </thead>
         <tbody>
             {% for category in categories %}
-                <tr>
+                <tr id="c-{{ category.id }}">
                     <td>{{ category.name }}</td>
                     <td class="actions-td">
-                        <a class="edit" href="/admin_panel/categories/edit/{{ category.id }}">
-                            <i class="material-icons-outlined">
-                                edit
-                            </i>
-                        </a>
-                        <a class="delete" href="/admin_panel/categories/delete/{{ category.id }}">
+                        <button class="delete" onclick="delete_category({{ category.id }})">
                             <i class="material-icons-outlined">
                                 delete
                             </i>
-                        </a>
+                        </button>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <div id="delete_modal" style="display: none">
+        <h1 id="del_cat_name">Вы действительно хотите удалить эту категорию?</h1>
+        <div class="buttons_block">
+            <button id="cancel-button" type="button" onclick="document.getElementById('delete_modal').style.display='none'">Отмена</button>
+            <button id="rm-button" type="button">Удалить</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/admin_panel/categories.js' %}"></script>
 {% endblock %}

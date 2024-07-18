@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {% block head %}
+    {% endblock %}
+    <title>KomShop</title>
+</head>
+<body>
+
+    <div class="content">
+
+        <div class="navbar">
+            <div class="site-title">
+                <a href="/">KomShop</a>
+            </div>
+            <div class="site-navbar-title">
+                <h1>Каталог</h1>
+            </div>
+            <div class="login-block">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.role.name == 'Администратор' %}
+                        <a href="/admin_panel">Панель администратора</a>                       
+                    {% endif %}
+                    <a href="/logout">Выйти</a>
+                {% else %}
+                    <a href="/login">Вход</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <main>
+            <div class="menu">
+
+            </div>
+            <div class="data">
+                <form method="post" class="search-line">
+                    <input type="text" placeholder="Поиск">
+                    <button id="search_button" type="submit">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                    {% csrf_token %}
+                </form>
+                <div class="data-block">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

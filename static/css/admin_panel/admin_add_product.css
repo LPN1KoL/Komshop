@@ -1,166 +1,90 @@
-#add{
+.form {
+    width: 100%;
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+form {
+    width: 100%;
     text-align: center;
 }
 
-.form-button{
-    width: 150px;
-    height: 30px;
+.form-field {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: start;
+    margin-bottom: 0.7rem;
+}
+
+.form-field > input {
+    width: calc(100% - 2rem);
+    padding: 0.2rem 1rem;
+    border-radius: 5px;
+    border: 1px solid black;
     font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid black;
-    background-color: lime;
-    transition: 0.2s;
 }
 
-.form-button:hover{
-    background-color: #39a157;
-}
-
-.form_field{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-}
-
-#id_name{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
-}
-
-.forma{
+.form-field-duo {
+    width: 100%;
     display: grid;
-    grid-template-columns: 100%;
-
+    grid-template-columns: 80% 20%;
+    text-align: start;
+    margin-bottom: 0.7rem;
 }
 
-#id_price{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+input[type="file"] {
+    display: none;
 }
 
-.form-field{
+#label_id_photo {
     text-align: center;
+    width: 100%;
+    border: 1px dashed black;
+    border-radius: 5px;
+    padding: 1rem 0;
+    cursor: pointer;
+    background-color: #fff;
 }
 
-#id_product_code{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+#label_id_photo:hover {
+    background-color: #e8e8e8;
 }
 
-#id_age_start{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+#clear_image_button {
+    background-color: #df6161;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-left: 0.3rem;
+    cursor: pointer;
 }
 
-#id_age_end{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+#clear_image_button:hover {
+    background-color: #c54e4e;
 }
 
-#id_height{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+.form-button {
+    width: 60%;
+    background-color: #5897fb;
+    color: whitesmoke;
+    border: none;
+    border-radius: 7px;
+    font-size: 20px;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
 }
 
-#id_width{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
+.form-button:hover {
+    background-color: #447ddc;
 }
 
-#id_length{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
-}
-
-#id_weight{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
-}
-
-#id_concrete{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
-}
-
-#id_installation_time{
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 0px 5px;
-    margin: 5px;
-}
-
-#id_photo{
-    margin: 5px;
-    margin-bottom: 20px;
-}
-
-.edit{
-    display: grid;
-    grid-template-columns: 35% 45% 20%;
-}
-
-h2{
-    text-align: center;
-}
-
-.tags-list{
-    display: grid;
-    grid-template-columns: 33% 34% 33%;
-}
-
-
-
-.categories-list{
-    display: grid;
-    grid-template-columns: 100%;
-}
-
-
-
-.tag{
-    display: inline;
-    margin-bottom: 10px;
+textarea {
+    resize: none;
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 20px;
+    border-radius: 5px;
+    height: 5vh;
 }

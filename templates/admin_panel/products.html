@@ -33,10 +33,10 @@
         </thead>
         <tbody>
             {% for product in products %}
-                <tr id="{{product.id}}">
+                <tr id="p-{{product.id}}">
                     <td>
                         {% if product.product_code %}
-                            {{ product.product_code }}
+                            <span>{{ product.product_code }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -44,9 +44,9 @@
                             {{ product.name }}
                         {% endif %}
                     </td>
-                    <td>
+                    <td class="img-td">
                         {% if product.photo %}
-                            <a href="{{ product.photo.url }}" style="color: blue" target="_blank">Фото</a>
+                            <img src="{{ product.photo.url }}" style="height: 100px" alt="not found">
                         {% endif %}
                     </td>
                     <td>
@@ -94,31 +94,37 @@
                             {{ product.price }}₽
                         {% endif %}
                     </td>
-                    <td class="actions-td">
-                        <a class="edit" href="/admin_panel/products/edit/{{ product.id }}">
-                            <i class="material-icons-outlined">
-                                edit
-                            </i>
-                        </a>
-                        <button  class="delete" onclick="delete_product({{product.id}})">
-                            <i class="material-icons-outlined">
-                                delete
-                            </i>
-                        </button>
+                    <td>
+                        <div class="actions-td">
+                            <a class="edit" href="/admin_panel/products/edit/{{ product.id }}">
+                                <i class="material-icons-outlined">
+                                    edit
+                                </i>
+                            </a>
+                            <button  class="delete" onclick="delete_product({{product.id}})">
+                                <i class="material-icons-outlined">
+                                    delete
+                                </i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-<div id="modal">
-    <span id="nadpis">Удалить этот продукт?</span>
-    <div class="btns">
-        <button id="cancel" onclick="document.getElementById('modal').style.display = 'none'">Отмена</button>
-        <button id="delete" onclick="delet()">Удалить</button>
+    <div id="delete_modal" style="display: none">
+        <div class="head">
+            <h1 id="rm-modal-h"></h1>
+        </div>
+        <div class="body">
+            <button id="cancel-button" type="button" onclick="document.getElementById('delete_modal').style.display = 'none'">Отмена</button>
+            <button id="rm-button" type="button">Удалить</button>
+        </div>
     </div>
-    <div id="id">a</div>
-</div>
 
-<script src="{% static 'js/admin_panel/admin.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/admin_panel/products.js' %}"></script>
 {% endblock %}

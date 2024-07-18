@@ -1,0 +1,95 @@
+.products-list {
+    height: calc(100% - 1rem - 20px - 1rem);
+    max-height: calc(100% - 1rem - 20px - 1rem);
+    overflow-y: scroll;
+}
+
+.products-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.pages {
+    height: 20px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product {
+    display: grid;
+    grid-template-columns: 300px auto;
+
+    border-radius: 10px;
+    border: 1px solid #a6a6a6;
+    padding: 15px;
+
+    margin-bottom: 0.5rem;
+}
+
+.pimage {
+    display: block;
+    max-width:300px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-info {
+    margin-left: 0.5rem;
+    display: grid;
+    grid-template-columns: auto 300px;
+}
+
+.buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.buy > button {
+    border: 1px solid #a6a6a6;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    font-size: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+#like, #to_trash {
+    height: 40px;
+    padding: 0.3rem 1rem;
+}
+
+#like:hover {
+    color: red;
+}
+
+#to_trash:hover {
+    background-color: #2cac60;
+    color: white;
+}
+
+.pprice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page-num {
+    background-color: white;
+    border-radius: 7px;
+    padding: 0.3rem 1rem;
+    color: black;
+    margin: 0.2rem 0.5rem;
+}
+
+a {
+    text-decoration: none;
+}

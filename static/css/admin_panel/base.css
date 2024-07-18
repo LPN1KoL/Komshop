@@ -48,9 +48,26 @@ main {
 
 .data {
     height: calc(100vh - 60px - 2rem);
-    width: calc(83vw - 2rem);
+    width: calc(83vw - 2rem - 2px);
     padding: 1rem;
     background-color: #f1f1f1;
+    overflow-y: scroll;
+}
+
+.data::-webkit-scrollbar {
+    width: 8px;               /* ширина scrollbar */
+    border-radius: 3px;
+}
+
+.data::-webkit-scrollbar-track {
+    background: #e8e8e8;        /* цвет дорожки */
+    border-radius: 3px;
+}
+
+.data::-webkit-scrollbar-thumb {
+    background-color: #494949;    /* цвет плашки */
+    border-radius: 3px;       /* закругления плашки */
+    border: 1px solid #9e9e9e;  /* padding вокруг плашки */
 }
 
 #logo-block {

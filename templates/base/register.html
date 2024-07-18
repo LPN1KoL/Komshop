@@ -1,0 +1,53 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/base/login.css' %}">
+    <title>Авторизация</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="site-title">
+            <a href="/">KomShop</a>
+        </div>
+        <div class="site-navbar-title">
+            <h1>Авторизация</h1>
+        </div>
+        <div class="login-block">
+
+        </div>
+    </div>
+
+    <div class="form-block">
+        <form id="forma" method="post">
+
+            {% for f in form %}
+                <label for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                {{f}}
+            {% endfor %}
+        
+            {% if error %}
+                <div class="errors-block">
+                    <span class="error">
+                        {{ error }}
+                    </span>
+                </div>
+            {% endif %}
+
+            {% csrf_token %}
+            <div class="fb-block">
+                <button type="submit">Зарегистрироваться</button><br>
+                <span>Уже зарегистрированы?</span>
+                <a id="reg_link" href="/login">Войти</a>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

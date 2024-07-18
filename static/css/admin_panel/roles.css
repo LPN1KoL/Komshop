@@ -5,7 +5,11 @@ table {
     font-size: 24px;
 }
 th, td {
+    table-layout: auto;
     padding: 0.3rem 1rem;
+}
+td {
+   height: 100%;
 }
 table tr th,
 table tr td {
@@ -37,6 +41,10 @@ table tr:last-child td:first-child {
   border-bottom-left-radius: 6px;
 }
 
+.img-td {
+    text-align: center;
+}
+
 /* bottom-right border-radius */
 table tr:last-child td:last-child {
   border-bottom-right-radius: 6px;
@@ -46,6 +54,7 @@ table tr:last-child td:last-child {
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
+    height: 100%;
 }
 
 .edit {
@@ -171,4 +180,52 @@ tbody > tr:hover {
 
 .delete:hover{
     cursor: pointer;
+}
+
+#rm-modal-h {
+    text-align: center;
+}
+
+#delete_modal {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 35vh;
+    height: 20vh;
+    left: 35vw;
+    width: 30vw;
+
+    transition: all 0.4s ease-in-out;
+
+    backdrop-filter: blur(10px) saturate(181%);
+    -webkit-backdrop-filter: blur(10px) saturate(181%);
+    background-color: rgba(148, 148, 148, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+
+    -webkit-box-shadow: 0px 0px 57px 49px rgba(34, 60, 80, 0.27);
+    -moz-box-shadow: 0px 0px 57px 49px rgba(34, 60, 80, 0.27);
+    box-shadow: 0px 0px 57px 49px rgba(34, 60, 80, 0.27);
+}
+
+#cancel-button, #rm-button {
+    padding: 0.3rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    border: none;
+    color: whitesmoke;
+    font-size: 18px;
+    margin-left: 0.5rem;
+}
+
+#cancel-button {
+    background-color: #5897fb;
+}
+
+#rm-button {
+    background-color: #df6161;
 }

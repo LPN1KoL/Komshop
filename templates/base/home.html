@@ -1,10 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hello
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/base/home.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock %}
+
+
+{% block content %}
+    <div class="products-list">
+        {% for product in products %}
+            <div class="product">
+                <img class="pimage" src="{{ product.photo.url }}" alt="">
+                <div class="product-info">
+                    <div class="info">
+                        <h1 class="np nm">{{ product.name }}</h1>
+                        <span>
+                            Код товара: {{ product.product_code }}<br>
+                            {% if product.installation_tile %}
+                                Время установки: {{ product.installation_tile }}ч<br>
+                            {% endif %}
+                            {% if product.concrete %}
+                                Бетон: {{ product.concrete }}м<br>
+                            {% endif %}
+                            {% if product.width %}
+                                Ширина: {{ product.width }}мм<br>
+                            {% endif %}
+                            {% if product.height %}
+                                Высота: {{ product.height }}мм<br>
+                            {% endif %}
+                            {% if product.length %}
+                                Длина: {{ product.length }}мм<br>
+                            {% endif %}
+                        </span><br>
+                    </div>
+                    <div class="pprice">
+                        <h1 class="np nm">Цена: {{ product.price }}₽</h1>
+                        <div class="buy">
+                            <button type="button" id="like">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                            <button type="button" id="to_trash">
+                                В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pages">
+        {% if lf_page %}
+            <a class="page-num" href="/catalog/page_{{ lf_page }}">{{ lf_page }}</a>
+        {% endif %}
+        {% if prev_page %}
+            <a class="page-num" href="/catalog/page_{{ prev_page }}">{{ prev_page }}</a>
+        {% endif %}
+        <a class="page-num" style="background-color: #2cac60; color: white;" href="/catalog/page_{{ current_page }}">{{ current_page }}</a>
+        {% if next_page %}
+            <a class="page-num" href="/catalog/page_{{ next_page }}">{{ next_page }}</a>
+        {% endif %}
+        {% if rf_page %}
+            <a class="page-num" href="/catalog/page_{{ rf_page }}">{{ rf_page }}</a>
+        {% endif %}
+    </div>
+{% endblock %}

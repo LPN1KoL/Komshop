@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/admin_panel/admin_add_product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_panel/admin_edit_product.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -11,53 +11,87 @@
     <div class="edit">
         <div class="form">
             <form class="forma" action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+
                 {% for f in form %}
-                <div class="form-field">
-                    {{ f }}
-                </div>
+                    {% if f.label == 'Общий вид' %}
+                        <div class="form-field-duo">
+                            <label id="label_{{ f.id_for_label }}" for="{{ f.id_for_label }}">{{ photo_url }}</label>
+                            {{ f }}
+                            <button id="clear_image_button" type="button" onclick="clear_image()">Очистить</button>
+                        </div>
+                    {% else %}
+                        <div class="form-field">
+                            <label id="label_{{ f.id_for_label }}" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                            {{ f }}
+                        </div>
+                    {% endif %}
                 {% endfor %}
-                <div class="form-field">
-                    <button class="form-button" type="submit">Сохранить</button>
-                </div>
+
+                {% csrf_token %}
+                <button class="form-button" type="submit">Сохранить</button>
             </form>
         </div>
-        <div class="tags">
-            <h2>Теги:</h2>
-            <div class="tags-list">
-                {% for tag in product_tags.all %}
-                    <div class="tag">
-                        <input onchange="tag_make_other({{tag.id}}, {{product.id}})" class="tag-is_active" type="checkbox" checked>
-                        <span class="tag-name">{{tag.name}}</span>
-                    </div>
-                {% endfor %}
-                {% for tag in other_tags.all %}
-                    <div class="tag">
-                        <input onchange="tag_make_product({{tag.id}}, {{product.id}})" class="tag-is_active" type="checkbox">
-                        <span class="tag-name">{{tag.name}}</span>
-                    </div>
-                {% endfor %}
+        <div class="sub-settings">
+            <div class="tags">
+                <h2>Теги:</h2>
+                <div class="tags-list">
+                    {% for tag in product_tags %}
+                        <div id="tag-{{ tag.id }}-block" class="tag-selected">
+                            <label for="tag-{{ tag.id }}">{{ tag.name }}</label>
+                            <input type="checkbox" id="tag-{{ tag.id }}" checked="checked" onchange="update_tag({{ tag.id }})">
+                        </div>
+                    {% endfor %}
+
+                    {% for tag in all_tags %}
+                        <div id="tag-{{ tag.id }}-block" class="tag">
+                            <label for="tag-{{ tag.id }}">{{ tag.name }}</label>
+                            <input type="checkbox" id="tag-{{ tag.id }}" onchange="update_tag({{ tag.id }})">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="cats">
+                <h2>Категории:</h2>
+                <div class="cats-list">
+                    {% for cat in product_categories %}
+                        <div id="cat-{{ cat.id }}-block" class="cat-selected">
+                            <label for="cat-{{ cat.id }}">{{ cat.name }}</label>
+                            <input type="checkbox" id="cat-{{ cat.id }}" checked="checked" onchange="update_cat({{ cat.id }})">
+                        </div>
+                    {% endfor %}
+
+                    {% for cat in all_categories %}
+                        <div id="cat-{{ cat.id }}-block" class="cat">
+                            <label for="cat-{{ cat.id }}">{{ cat.name }}</label>
+                            <input type="checkbox" id="cat-{{ cat.id }}" onchange="update_cat({{ cat.id }})">
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-        <div class="categories">
-            <h2>Категории:</h2>
-            <div class="categories-list">
-                {% for category in product_categories.all %}
-                    <div class="tag">
-                        <input onchange="cat_make_other({{category.id}}, {{product.id}})" class="tag-is_active" type="checkbox" checked>
-                        <span class="tag-name">{{category.name}}</span>
-                    </div>
-                {% endfor %}
-                {% for category in other_categories.all %}
-                    <div class="tag">
-                        <input onchange="cat_make_product({{category.id}}, {{product.id}})" class="tag-is_active" type="checkbox">
-                        <span class="tag-name">{{category.name}}</span>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+
     </div>
 
+    <input id="product_id" value="{{ pid }}" type="number" hidden>
 
-<script src="{% static 'js/admin_panel/admin.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/admin_panel/edit_product.js' %}"></script>
+    <script>
+    
+        document.getElementById('id_photo').addEventListener('change', () => {
+            document.getElementById('label_id_photo').innerText = document.getElementById('id_photo').value
+        })
+    
+        let img_ = document.getElementsByClassName('form-field-duo')[0]
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+        img_.childNodes[2].remove()
+    </script>
 {% endblock %}

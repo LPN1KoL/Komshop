@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/base/home.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock %}
+
+
+{% block content %}
+    <div class="products-list">
+        {% for product in page_obj %}
+            <div class="product">
+                <img class="pimage" src="{{ product.photo.url }}" alt="">
+                <div class="product-info">
+                    <div class="info">
+                        <h1 class="np nm">{{ product.name }}</h1>
+                        <span>
+                            Код товара: {{ product.product_code }}<br>
+                            {% if product.installation_tile %}
+                                Время установки: {{ product.installation_tile }}ч<br>
+                            {% endif %}
+                            {% if product.concrete %}
+                                Бетон: {{ product.concrete }}м<br>
+                            {% endif %}
+                            {% if product.width %}
+                                Ширина: {{ product.width }}мм<br>
+                            {% endif %}
+                            {% if product.height %}
+                                Высота: {{ product.height }}мм<br>
+                            {% endif %}
+                            {% if product.length %}
+                                Длина: {{ product.length }}мм<br>
+                            {% endif %}
+                        </span><br>
+                    </div>
+                    <div class="pprice">
+                        <h1 class="np nm">Цена: {{ product.price }}₽</h1>
+                        <div class="buy">
+                            <button type="button" id="like">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                            <button type="button" id="to_trash">
+                                В корзину
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="nav-list">
+        {% for p in page_obj.paginator.page_range %}
+            <div class=sdf>
+                <a href="?page={{p}}">{{p}}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

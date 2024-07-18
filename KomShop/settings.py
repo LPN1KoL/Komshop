@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'shop.apps.ShopConfig'
 ]
 
@@ -60,18 +61,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'KomShop.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'komshop',
         'PORT': 5432,
         'USER': 'komshop',
-        'PASSWORD': 'komshop_user'
+        'PASSWORD': 'komshop_user',
+        'HOST': 'localhost'
     }
 }
+
+
+# iF3pX4tA
+# pg_dump -d komshop -t shop_product > file.sql
 
 AUTH_PASSWORD_VALIDATORS = [
     {

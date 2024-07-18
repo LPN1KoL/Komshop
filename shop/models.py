@@ -86,12 +86,11 @@ class Product(models.Model):
 	height = models.PositiveIntegerField(verbose_name='Высота', null=True, blank=True)
 	width = models.PositiveIntegerField(verbose_name='Ширина', null=True, blank=True)
 	length = models.PositiveIntegerField(verbose_name='Длина', null=True, blank=True)
+	params = models.TextField(verbose_name='Дополнительные параметры', null=True, default=None, blank=True)
 	weight = models.FloatField(verbose_name='Вес', null=True, blank=True)
 	concrete = models.FloatField(verbose_name='Бетон', null=True, blank=True)
 	installation_time = models.FloatField(verbose_name='Время установки', null=True, blank=True)
 	price = models.FloatField(verbose_name='Цена')
-	tags = models.ManyToManyField(Tag, null=True, verbose_name='Теги')
-	categories = models.ManyToManyField(Category, null=True, verbose_name='Категории')
 
 	def __str__(self):
 		return f'{self.name} ({self.product_code})'
