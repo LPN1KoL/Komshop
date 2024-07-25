@@ -28,5 +28,5 @@ urlpatterns = [
 	path('login', login_view),
 	path('register', reg_view),
 	path('logout', logout),
-	path('catalog', catalog)
+	path('catalog', catalog),
 ] + admin_panel_urlpatterns

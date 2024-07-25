@@ -39,15 +39,6 @@
 
             </div>
             <div class="data">
-                <form method="post" class="search-line">
-                    <input type="text" placeholder="Поиск">
-                    <button id="search_button" type="submit">
-                        <span class="material-symbols-outlined">
-                            search
-                        </span>
-                    </button>
-                    {% csrf_token %}
-                </form>
                 <div class="data-block">
                     {% block content %}
                     {% endblock %}

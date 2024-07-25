@@ -27,3 +27,12 @@ class AdminCategory(admin.ModelAdmin):
 class AdminTag(admin.ModelAdmin):
 	list_display = ('product_code', 'name', 'price')
 	search_fields = ('product_code', )
+
+@admin.register(ProductCategory)
+class AdminProductCategory(admin.ModelAdmin):
+	list_display = ('id', )
+
+
+@admin.register(ProductTag)
+class AdminProductTag(admin.ModelAdmin):
+	list_display = ('id', )

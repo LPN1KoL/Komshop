@@ -201,6 +201,13 @@
         </div>
     </div>
 
+
+    <div class="ccategorys">
+        {% for cat in categories %}
+            <a href="/catalog?cat={{cat.name}}">{{cat.name}}</a>
+        {% endfor %}
+    </div>
+
     <div class="footer">
         <h4>© 2024 Весёлые дворики.</h4>
     </div>

@@ -3,10 +3,10 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
-
+from django.views.decorators.csrf import csrf_exempt
 from .forms import *
 from .models import *
-
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -20,6 +20,7 @@ def home(request):
 	p4 = choice(ps)
 	p5 = choice(ps)
 	p6 = choice(ps)
+	categories = Category.objects.all()
 
 	return render(request, 'new_ui/home.html', {
 		'name_1': p1.name, 'price_1': p1.price, 'image_1': p1.photo.url,
@@ -27,7 +28,8 @@ def home(request):
 		'name_3': p3.name, 'price_3': p3.price, 'image_3': p3.photo.url,
 		'name_4': p4.name, 'price_4': p4.price, 'image_4': p4.photo.url,
 		'name_5': p5.name, 'price_5': p5.price, 'image_5': p5.photo.url,
-		'name_6': p6.name, 'price_6': p6.price, 'image_6': p6.photo.url
+		'name_6': p6.name, 'price_6': p6.price, 'image_6': p6.photo.url,
+		'categories': categories
 	})
 
 
@@ -98,11 +100,74 @@ def logout(request):
 
 
 def catalog(request):
-	product_list = Product.objects.all()
-	paginator = Paginator(product_list, 3)
-	page_number = request.GET.get('page')
-	page_obj = paginator.get_page(page_number)
-	return render(request, 'base/catalog.html', {'page_obj': page_obj})
+	products = []
+	search = request.POST.get('FD1')
+	print(request.POST)
+	cat_name = request.GET.get('cat')
+	price_start = request.POST.get('price_start')
+	price_end = request.POST.get('price_end')
+	category = Category.objects.filter(name=cat_name)
+	product_cat = ProductCategory.objects.filter(category=category[0])
+	if search:
+		for prod_c in product_cat:
+			if prod_c.product.name.startswith(search):
+				if price_start or price_end:
+					if price_start and price_end:
+						if prod_c.product.price >= float(price_start) and prod_c.product.price <= float(price_end):
+							products.append(prod_c.product.to_json())
+
+					elif price_start and not price_end:
+						if prod_c.product.price >= float(price_start):
+							products.append(prod_c.product.to_json())
+
+					elif price_end and not price_start:
+						if prod_c.product.price <= float(price_end):
+							products.append(prod_c.product.to_json())
+
+				else:
+					products.append(prod_c.product.to_json())
+
+			else:
+				product_tags = ProductTag.objects.filter(product=prod_c.product)
+				for p_tag in product_tags:
+					if p_tag.tag.name.startswith(search):
+						if price_start or price_end:
+							if price_start and price_end:
+								if prod_c.product.price >= float(price_start) and prod_c.product.price <= float(price_end):
+									products.append(prod_c.product.to_json())
+
+							elif price_start and not price_end:
+								if prod_c.product.price >= float(price_start):
+									products.append(prod_c.product.to_json())
+
+							elif price_end and not price_start:
+								if prod_c.product.price <= float(price_end):
+									products.append(prod_c.product.to_json())
+
+						else:
+							products.append(prod_c.product.to_json())
+	else:
+		if price_start or price_end:
+			if price_start and price_end:
+				for prod_c in product_cat:
+					if prod_c.product.price >= float(price_start) and prod_c.product.price <= float(price_end):
+						products.append(prod_c.product.to_json())
+
+			elif price_start and not price_end:
+				for prod_c in product_cat:
+					if prod_c.product.price >= float(price_start):
+						products.append(prod_c.product.to_json())
+
+			elif price_end and not price_start:
+				for prod_c in product_cat:
+					if prod_c.product.price <= float(price_end):
+						products.append(prod_c.product.to_json())
+
+		else:
+			for prod_c in product_cat:
+				products.append(prod_c.product.to_json())
+
+	return render(request, 'base/catalog.html', {'cat_name': cat_name, 'products': products, 'search': search})
 
 
 

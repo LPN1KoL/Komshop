@@ -9,54 +9,79 @@
 
 
 {% block content %}
+
+                <form id="Form1" method="post" class="search-line" >
+                    <input type="text" placeholder="Поиск" name="search">
+                    <button id="search_button" type="submit" onclick="sendData()">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                    {% csrf_token %}
+                </form>
+
+    <h1>Товары категории "{{cat_name}}"</h1>
+
+    {% if search %}
+        <h2>Результаты поиска "{{search}}"</h2>
+    {% endif %}
+<div class="data">
     <div class="products-list">
-        {% for product in page_obj %}
-            <div class="product">
-                <img class="pimage" src="{{ product.photo.url }}" alt="">
-                <div class="product-info">
-                    <div class="info">
-                        <h1 class="np nm">{{ product.name }}</h1>
-                        <span>
-                            Код товара: {{ product.product_code }}<br>
-                            {% if product.installation_tile %}
-                                Время установки: {{ product.installation_tile }}ч<br>
-                            {% endif %}
-                            {% if product.concrete %}
-                                Бетон: {{ product.concrete }}м<br>
-                            {% endif %}
-                            {% if product.width %}
-                                Ширина: {{ product.width }}мм<br>
-                            {% endif %}
-                            {% if product.height %}
-                                Высота: {{ product.height }}мм<br>
-                            {% endif %}
-                            {% if product.length %}
-                                Длина: {{ product.length }}мм<br>
-                            {% endif %}
-                        </span><br>
-                    </div>
-                    <div class="pprice">
-                        <h1 class="np nm">Цена: {{ product.price }}₽</h1>
-                        <div class="buy">
-                            <button type="button" id="like">
-                                <span class="material-symbols-outlined">
-                                    favorite
-                                </span>
-                            </button>
-                            <button type="button" id="to_trash">
-                                В корзину
-                            </button>
+        {% for product in products %}
+
+                <div class="product">
+                    <img class="pimage" src="{{ product.photo }}" alt="">
+                    <div class="product-info">
+                        <div class="info">
+                            <h1 class="np nm">{{ product.name }}</h1>
+                            <span>
+                                Код товара: {{ product.product_code }}<br>
+                                {% if product.installation_tile %}
+                                    Время установки: {{ product.installation_tile }}ч<br>
+                                {% endif %}
+                                {% if product.concrete %}
+                                    Бетон: {{ product.concrete }}м<br>
+                                {% endif %}
+                                {% if product.width %}
+                                    Ширина: {{ product.width }}мм<br>
+                                {% endif %}
+                                {% if product.height %}
+                                    Высота: {{ product.height }}мм<br>
+                                {% endif %}
+                                {% if product.length %}
+                                    Длина: {{ product.length }}мм<br>
+                                {% endif %}
+                            </span><br>
+                        </div>
+                        <div class="pprice">
+                            <h1 class="np nm">Цена: {{ product.price }}₽</h1>
+                            <div class="buy">
+                                <button type="button" id="like">
+                                    <span class="material-symbols-outlined">
+                                        favorite
+                                    </span>
+                                </button>
+                                <button type="button" id="to_trash">
+                                    В корзину
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
         {% endfor %}
     </div>
-    <div class="nav-list">
-        {% for p in page_obj.paginator.page_range %}
-            <div class=sdf>
-                <a href="?page={{p}}">{{p}}</a>
-            </div>
-        {% endfor %}
+    <div class="filters">
+        <form id="Form2" action="" method="post" >
+            {% csrf_token %}
+            <input type="number" placeholder="Цена от" name="price_start">
+            <input type="number" placeholder="Цена до" name="price_end">
+            <button type="submit" onclick="sendData()">Применить</button>
+        </form>
     </div>
+    </div>
+
+
+<script src="{% static 'js/base/catalog.js' %}"></script>
+
 {% endblock %}
